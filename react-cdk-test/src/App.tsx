@@ -6,7 +6,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p> Holy fucking shit this actually works</p>
+        <h1>Beautiful app wow so pretty</h1>
+        <p>just kidding i will make it look like an actual web app soon don't worry</p>
       </header>
     </div>
   );
