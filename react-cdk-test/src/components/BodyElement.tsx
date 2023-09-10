@@ -1,3 +1,7 @@
+/**
+ * TODO - Check URI encoding
+ * TODO - Empty string handling for phrase
+ */
 import { InputGroup, Input, Button } from "reactstrap";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -5,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 export default function BodyElement() {
 	const navigate = useNavigate();
 	const [file, setFile] = useState<File | null>();
+	const [phrase, setPhrase] = useState('');
 	
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const file = event.target.files?.[0];
@@ -14,11 +19,11 @@ export default function BodyElement() {
 	}
 
 	const imageSelect = () => {
-		navigate("/result?s=image");
+		navigate(`/result?s=image`);
 	}
 
 	const phraseSelect = () => {
-		navigate("/result?s=text");
+		navigate(`/result?s=text&phrase=${phrase}`);
 	}
 	
 	return (
@@ -28,7 +33,7 @@ export default function BodyElement() {
 				<h1>Search container</h1>
 				<div className="col-5">
 					<InputGroup className="phraseSearch">
-						<Input placeholder="A photo of a kids bedroom" />
+						<Input placeholder="A photo of a kids bedroom" onChange={(event) => setPhrase(event.target.value)}/>
 						<Button onClick={phraseSelect}>Search Via Phrase</Button>
 						{/* OnClick actions */}
 					</InputGroup>
@@ -37,29 +42,20 @@ export default function BodyElement() {
 					<p><strong>OR</strong></p>
 				</div>
                 <div className="col-5">
-                    <input type="file" accept="image/*" onChange={handleChange}/>
-					<Button onClick={imageSelect}>Search Via Image</Button>
+					<InputGroup className="imageSearch" >
+                    	<Input type="file" accept="image/*" onChange={handleChange}/>
+						<Button onClick={imageSelect}>Search Via Image</Button>
+					</InputGroup>
                 </div>
 			</div>
 			{ file && (
 				<div className="row">
 					<div className="col">
 						<p>Selected Image:</p>
-						<img className="imagePreview" src={URL.createObjectURL(file)}/>
+						<img className="imagePreview" src={URL.createObjectURL(file)} alt="The image you selected"/>
 					</div>
 				</div>
-			)}
-			
-			
+			)}			
 		</div>
-
-		/**
-		 * One container containing everything
-		 *      Sub container:
-		 *          contains Semantic text search and Image search boxes
-		 *      Sub container with visible box:
-		 *          Contains filters (area, radius, price range)
-		 *          House cards - image, house info, similarity match %
-		 */
 	);
 }
