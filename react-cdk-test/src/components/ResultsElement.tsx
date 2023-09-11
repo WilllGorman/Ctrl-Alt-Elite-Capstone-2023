@@ -5,12 +5,11 @@ import { useSearchParams } from "react-router-dom";
 // SET IN PRIVATE .env FILE
 
 export default function ResultsElement() {
-	// CHANGE TO WHATEVER BRAYDENS NEW EC2 STATIC IP IS
-	var APIURL = "http://ec2-3-105-193-192.ap-southeast-2.compute.amazonaws.com:8000/api/results";
+	// CHANGE TO WHATEVER BRAYDENS NEW EC2 STATIC IP IS PORT 8443
+	var APIURL = "http://ec2-54-79-37-141.ap-southeast-2.compute.amazonaws.com:8000/api/results";
 	var newURL: RequestInfo | URL;
 	
 	const [searchParams] = useSearchParams();
-	const [imageName, setImageName] = useState([]);
 	const [images, setImages] = useState([""]);
 	const [similarity, setSimilarity] = useState([]);
 	const [waiting, setWaiting] = useState(true);
@@ -45,7 +44,6 @@ export default function ResultsElement() {
 	
 			const image_name = parsedResultsObject.map((entry: { image_url: any; }) => entry.image_url);
 			// console.log("IMAGE NAME RAW: ", image_name);
-			setImageName(image_name);
 			// console.log(imageName);
 		
 			const similarityNumbers = parsedResultsObject.map((entry: { cos_sim: any; }) => entry.cos_sim);
@@ -90,6 +88,7 @@ export default function ResultsElement() {
 		return <div>Error: {error}</div>
 	}
 
+	// Static property data for results filler content
 	const propertyData = [
 		{
 			"address" : "36 Hydrus Street, Austral 2179",
@@ -127,7 +126,6 @@ export default function ResultsElement() {
 
 	return (
 		<div className="container justify-content-center">
-			At least this prints
 			{images.map((img, index) => (
 				<div key={index}>
 					<div className="row">
