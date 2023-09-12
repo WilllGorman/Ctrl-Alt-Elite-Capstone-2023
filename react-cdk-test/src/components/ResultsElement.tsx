@@ -52,8 +52,8 @@ export default function ResultsElement() {
 
 			const s3 = new AWS.S3();
 
-			const bucketName = "ctrl-alt-elite-image-dataset";
-			const filePref = "master/master/";
+			const bucketName = "image-dataset-ctrl-alt-elite";
+			const filePref = "master/";
 			 
 			Promise.all(
 				image_name.map((item: string) => {
