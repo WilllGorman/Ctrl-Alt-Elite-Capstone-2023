@@ -6,7 +6,7 @@ import { useSearchParams } from "react-router-dom";
 
 export default function ResultsElement() {
 	// CHANGE TO WHATEVER BRAYDENS NEW EC2 STATIC IP IS PORT 8443
-	var APIURL = "http://ec2-54-79-37-141.ap-southeast-2.compute.amazonaws.com:8000/api/results";
+	var APIURL = "http://ec2-54-253-138-10.ap-southeast-2.compute.amazonaws.com:8000/api/results";
 	var newURL: RequestInfo | URL;
 	
 	const [searchParams] = useSearchParams();
@@ -99,7 +99,7 @@ export default function ResultsElement() {
 			"area" : "Space - 300m²"
 		},
 		{
-			"address" : "50 Dean Parade, Lempn Tree Passage 2319",
+			"address" : "50 Dean Parade, Lemon Tree Passage 2319",
 			"price" : "$725,000",
 			"bed" : "Bedrooms - 4",
 			"bath" : "Bathrooms - 2",
@@ -131,7 +131,7 @@ export default function ResultsElement() {
 					<div className="row">
 						{/* Image goes here */}
 						<img src={img} className="imagePreview" alt={`Image ${index + 1}`} />
-						<h1>Property {index + 1} - {similarity[index]}% match to search</h1>
+						<h1>Property {index + 1} - {formatSimilarity(similarity[index])}% match to search</h1>
 					</div>
 					<div className="row">
 						<div className="col-6">
@@ -151,7 +151,8 @@ export default function ResultsElement() {
 	);
 }
 
-function formatSimilarity() {
-
+function formatSimilarity(similarity: number) {
+	var formattedNumber = similarity * 100; 
+	return formattedNumber
 }
 
