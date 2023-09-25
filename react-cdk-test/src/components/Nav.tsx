@@ -1,5 +1,4 @@
-import { Navbar, NavbarBrand, Nav, NavItem, NavLink, NavbarText } from "reactstrap";
-
+import { Navbar, Nav, NavLink } from "reactstrap";
 /**
  * NAVBAR FUNCTION
  * Tasks that can be performed:
@@ -13,10 +12,11 @@ import { Navbar, NavbarBrand, Nav, NavItem, NavLink, NavbarText } from "reactstr
 export default function Navigation() {
     return (
         <header>
-            <div>
                 <Navbar>
-                    <NavbarBrand href="/">Ctrl Alt Elite Artefact Demo</NavbarBrand> 
-                    <Nav className="me-auto" navbar>
+                    <Nav className="navigation-links" navbar>
+                        <NavLink className="navTitleLink" href="/">
+                            Ctrl Alt Elite Artefact Demo
+                        </NavLink>
                         <NavLink className="navLink" href="https://www.corelogic.com.au/">
                             CoreLogic Home
                         </NavLink>
@@ -28,7 +28,6 @@ export default function Navigation() {
                         </NavLink>
                     </Nav>
                 </Navbar>
-            </div>
         </header>
     );
 }
