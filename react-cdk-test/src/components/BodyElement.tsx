@@ -16,9 +16,9 @@ export default function BodyElement() {
 		// Store variables in .env file
 	
 		AWS.config.update({
-			accessKeyId: AWS_ACCESS_KEY,
-			secretAccessKey: AWS_SECRET_KEY,
-			region: AWS_REGION,
+			accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY,
+			secretAccessKey: process.env.REACT_APP_AWS_SECRET_KEY,
+			region: process.env.REACT_APP_AWS_REGION,
 		});
 	
 		const s3 = new AWS.S3();
@@ -60,32 +60,43 @@ export default function BodyElement() {
 	
 	return (
 		<article>
-			<div className="content-div">
+			<div className="content-div background-layer">
 				{/* Main container */}
-				<h1>Search container</h1>
+				<h1>Welcome to our Artefact Home Page</h1>
+
+				<p>Below are two machine learnt search options developed by our team of pros.</p>
+
+				<h4>Services Used:</h4>
+				<li>React templated using typscript to host the webpage structure.</li>
+				<li>Python Script Personalised to communicate with AWS Lambda.</li>
+				<li>Amazon EC2 cloud service for webpage deployment & managment.</li>
+				<li>Amazon S3 bucket cloud service for storage image and related data.</li>
+				<li>Github repository to host code for callaboration and artefact handover.</li>
 				<div className="text-search-div">
-					<InputGroup className="phraseSearch">
-						<Input placeholder="A photo of a kids bedroom" onChange={(event) => setPhrase(event.target.value)}/>
-						<Button onClick={phraseSelect}>Search Via Phrase</Button>
-						{/* OnClick actions */}
-					</InputGroup>
+					<div className="col-6 float-left">
+						<h2 className="Div-Spacing">Text Search</h2>
+						<InputGroup className="phraseSearch">
+							<Input placeholder="A photo of a kids bedroom" onChange={(event) => setPhrase(event.target.value)}/>
+							<Button onClick={phraseSelect}>Search Phrase</Button>
+							{/* OnClick actions */}
+						</InputGroup>
+					</div>
+					<div className="col-2 Div-Spacing" style={{textAlign:"center", float: 'left'}}>
+					<h3>or</h3>
+					</div>
+					<div className="col-6 float-right">
+						<h2 className="Div-Spacing">Image Search</h2>
+						<InputGroup className="imageSearch" >
+							<Input type="file" accept="image/*" onChange={handleChange}/>
+							<Button onClick={imageSelect}>Search Image</Button>
+						</InputGroup>
+					</div>
 				</div>
-				<div className="col-2" style={{textAlign:"center"}}>
-					<p><strong>OR</strong></p>
-				</div>
-                <div className="col-5">
-					<InputGroup className="imageSearch" >
-                    	<Input type="file" accept="image/*" onChange={handleChange}/>
-						<Button onClick={imageSelect}>Search Via Image</Button>
-					</InputGroup>
-                </div>
 			</div>
 			{ userFile && (
-				<div className="row">
-					<div className="col">
-						<p>Selected Image:</p>
-						<img className="imagePreview" src={URL.createObjectURL(userFile)} alt="The image you selected"/>
-					</div>
+				<div className="background-input">
+					<p>Selected Image:</p>
+					<img className="image-middle imagePreview" src={URL.createObjectURL(userFile)}/>
 				</div>
 			)}			
 		</article>

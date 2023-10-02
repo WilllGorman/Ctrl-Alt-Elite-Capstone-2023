@@ -3,11 +3,10 @@ import AWS from "aws-sdk";
 import { useSearchParams } from "react-router-dom";
 
 // SET IN PRIVATE .env FILE
-
+ 
 export default function ResultsElement() {
 	// CHANGE TO WHATEVER BRAYDENS NEW EC2 STATIC IP IS PORT 8443
-	//var APIURL = "http://68.73.1.118:8000/api/results";
-	var APIURL = "http://ec2-3-25-81-18.ap-southeast-2.compute.amazonaws.com:8000/api/results";
+	var APIURL = "http://ec2-52-64-41-140.ap-southeast-2.compute.amazonaws.com:8000/api/results";
 	var newURL: RequestInfo | URL;
 	
 	const [searchParams] = useSearchParams();
@@ -16,16 +15,13 @@ export default function ResultsElement() {
 	const [waiting, setWaiting] = useState(true);
 	const [error, setError] = useState(null);
 
-	// Upon page rendering:
 	useEffect(() => {
-		// Set AWS config file
 		AWS.config.update({
-			accessKeyId: AWS_ACCESS_KEY,
-			secretAccessKey: AWS_SECRET_KEY,
-			region: AWS_REGION,
+			accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY,
+			secretAccessKey: process.env.REACT_APP_AWS_SECRET_KEY,
+			region: process.env.REACT_APP_AWS_REGION,
 		});
-
-		// if search type is search
+		
 		const searchType = searchParams.get("s");
 		if (searchType === "text") {
 			const searchPhrase = searchParams.get("phrase");
@@ -51,7 +47,7 @@ export default function ResultsElement() {
 			// console.log(imageName);
 		
 			const similarityNumbers = parsedResultsObject.map((entry: { cos_sim: any; }) => entry.cos_sim);
-			setSimilarity(similarityNumbers);
+			setSimilarity((similarityNumbers));
 			// console.log(similarity);
 
 			const s3 = new AWS.S3();
@@ -131,16 +127,17 @@ export default function ResultsElement() {
 
 	return (
 		<article>
-			<div className="content-div">
+			<div className="background-output">
+				<h1>Search output</h1>
 				{images.map((img, index) => (
 					<div key={index}>
-						<div className="div-property-container">
+						<div className="output-result">
 							{/* Image goes here */}
-							<h1>Property {index + 1} - {formatSimilarity(similarity[index])}% match to search</h1>
-							<img src={img} className="imagePreview" alt={`Image ${index + 1}`} />
-							<div className="div-property-group">
-								<h2>{propertyData[index].address}</h2>
-								<h3>{propertyData[index].price}</h3>
+							<h2 className="output-title">Property {index + 1} - {formatSimilarity(similarity[index])}% match to search</h2>
+							<img src={img} className="output-img" alt={`${index + 1}`} />
+							<div className="output-card">
+								<h5>{propertyData[index].address}</h5>
+								<h6>{propertyData[index].price}</h6>
 								<p>{propertyData[index].bed}</p>
 								<p>{propertyData[index].bath}</p>
 								<p>{propertyData[index].car}</p>
@@ -156,7 +153,7 @@ export default function ResultsElement() {
 
 function formatSimilarity(similarity: number) {
 	// var word;
-	var formattedNumber = similarity * 100; 
+	var formattedNumber = Math.round(similarity * 10000) /100; 
 	// if (formattedNumber > 90) word = `Very High Match to Search: ${formattedNumber.toFixed(4)}% match`;
 	// else if (formattedNumber > 70) word = `High Similarity Match: ${formattedNumber.toFixed(4)}% match`;
 	// else if (formattedNumber > 40) word = ``

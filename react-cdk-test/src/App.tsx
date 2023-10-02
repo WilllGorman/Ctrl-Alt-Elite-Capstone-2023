@@ -1,25 +1,25 @@
 import React from "react";
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/style.css';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import AWS from 'aws-sdk';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Navigation from "./components/Nav";
+import NavBar  from "./components/Nav";
 import Footer from "./components/Footer";
 
 import Results from "./pages/Results";
 import Landing from "./pages/Landing";
 
-/**
- * App() acts as a collector for all other items and elements. All elements being displayed on the page are done so from here.
- * @returns HTML elements for the entire page.
- */
+// 
 
 function App() {
+	let items = ["Home", "CoreLogic", "Qut", "React", "AWS Lambda","AWS S3 Bucket", "AWS EC2"];
+	let imagePathCAE = "https://cdn.discordapp.com/attachments/1079967000316608545/1145651706399559820/Ctr_Alt_Elite.png?ex=6519e50b&is=6518938b&hm=aedb9363d94d15c2b20dcfabf5838fea4801031d3aa593b8208b41b4c5f04854&"
+	let imagePathGit = "https://cdn4.iconfinder.com/data/icons/iconsimple-logotypes/512/github-512.png"
 	return (
 		<BrowserRouter>	
 			<div className="App">
-				<Navigation />
+			<NavBar brandName="Ctl Alt Elite Artefact" imageSrcPathCAE={imagePathCAE} imageSrcPathGit={imagePathGit} navItems={items} />
 
 				<Routes>
 					<Route path="/" element={<Landing />}/> 
