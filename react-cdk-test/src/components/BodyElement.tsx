@@ -1,7 +1,3 @@
-/**
- * TODO - Check URI encoding
- * TODO - Empty string handling for phrase
- */
 import { InputGroup, Input, Button } from "reactstrap";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -74,31 +70,32 @@ export default function BodyElement() {
 				<li>Github repository to host code for callaboration and artefact handover.</li>
 				<div className="text-search-div">
 					<div className="col-6 float-left">
-						<h2 className="Div-Spacing">Text Search</h2>
+						<h2 className="div-spacing">Text Search</h2>
 						<InputGroup className="phraseSearch">
 							<Input placeholder="A photo of a kids bedroom" onChange={(event) => setPhrase(event.target.value)}/>
 							<Button onClick={phraseSelect}>Search Phrase</Button>
 							{/* OnClick actions */}
 						</InputGroup>
 					</div>
-					<div className="col-2 Div-Spacing" style={{textAlign:"center", float: 'left'}}>
+					<div className="col-2 div-spacing" style={{textAlign:"center", float: 'left'}}>
 					<h3>or</h3>
 					</div>
 					<div className="col-6 float-right">
-						<h2 className="Div-Spacing">Image Search</h2>
+						<h2 className="div-spacing">Image Search</h2>
 						<InputGroup className="imageSearch" >
 							<Input type="file" accept="image/*" onChange={handleChange}/>
 							<Button onClick={imageSelect}>Search Image</Button>
 						</InputGroup>
+							
 					</div>
 				</div>
 			</div>
 			{ userFile && (
 				<div className="background-input">
-					<p>Selected Image:</p>
-					<img className="image-middle imagePreview" src={URL.createObjectURL(userFile)}/>
+					<h2>Selected Input Image:</h2>
+					<img className="image-middle input-image" src={URL.createObjectURL(userFile)}/>
 				</div>
-			)}			
+			)}	
 		</article>
 	);
 }

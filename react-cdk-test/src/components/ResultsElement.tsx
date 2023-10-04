@@ -2,11 +2,9 @@ import React, { useEffect, useState } from "react";
 import AWS from "aws-sdk";
 import { useSearchParams } from "react-router-dom";
 
-// SET IN PRIVATE .env FILE
- 
 export default function ResultsElement() {
 	// CHANGE TO WHATEVER BRAYDENS NEW EC2 STATIC IP IS PORT 8443
-	var APIURL = "http://ec2-52-64-41-140.ap-southeast-2.compute.amazonaws.com:8000/api/results";
+	var APIURL = "http://127.0.0.1:8000/api/results";
 	var newURL: RequestInfo | URL;
 	
 	const [searchParams] = useSearchParams();
@@ -28,7 +26,6 @@ export default function ResultsElement() {
 			newURL = `${APIURL}?searchType=text&searchPhrase=${searchPhrase}`;
 		} else if (searchType === "image") {
 			const imgName = searchParams.get("imgName");
-			// image search handling here
 			newURL = `${APIURL}?searchType=image&imgName=${imgName}`
 		}
 
@@ -38,17 +35,12 @@ export default function ResultsElement() {
 			return response.json();
 		})
 		.then((jsonData) => {
-			// console.log("API DATA: ", jsonData);
 			const parsedResultsObject = JSON.parse(jsonData.results);
-			// console.log("PARSED API RESULTS: ", parsedResultsObject);
 	
 			const image_name = parsedResultsObject.map((entry: { image_url: any; }) => entry.image_url);
-			// console.log("IMAGE NAME RAW: ", image_name);
-			// console.log(imageName);
 		
 			const similarityNumbers = parsedResultsObject.map((entry: { cos_sim: any; }) => entry.cos_sim);
 			setSimilarity((similarityNumbers));
-			// console.log(similarity);
 
 			const s3 = new AWS.S3();
 

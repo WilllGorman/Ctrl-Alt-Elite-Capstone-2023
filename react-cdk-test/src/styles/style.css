@@ -20,15 +20,15 @@
   margin: 5vh 10% 0 10%;
   padding: 5vh 5% 5vh 5%;
   height: calc(440px + 5vh);
-  border-radius: 10px;
+  border-radius: 10px 0 10px 0;
 }
 
 .background-input {
   background-color: rgba(49, 49, 97, 0.5);
-  margin: 1vh 20% 0 20%;
-  padding: 5vh 5% 5vh 5%;
-  height: calc(100px + 25vh);
-  border-radius: 10px;
+  margin: 0vh 10% 0 10%;
+  padding: 1vh 5% 5vh 5%;
+  height: calc(140px + 20vh);
+  border-radius: 0 0 100px 100px;
 }
 
 .collapse:not(.show) {
@@ -83,7 +83,7 @@
   float: right;
 }
 
-.Div-Spacing {
+.div-spacing {
   padding: 20px;
 }
 
@@ -113,10 +113,14 @@ html, body {
   padding-right: 40px;
 }
 
+.input-image {
+  height: calc(100px + 15vh);
+}
+
 .footer {
   color:white;
   font-size: 15px;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
   background:rgba(49, 49, 97, 0.9);
