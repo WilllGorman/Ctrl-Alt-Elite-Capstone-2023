@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import AWS from "aws-sdk";
 import { useSearchParams } from "react-router-dom";
 
+// SET IN PRIVATE .env FILE
+ 
 export default function ResultsElement() {
 	// CHANGE TO WHATEVER BRAYDENS NEW EC2 STATIC IP IS PORT 8443
 	var APIURL = "http://127.0.0.1:8000/api/results";
@@ -13,6 +15,8 @@ export default function ResultsElement() {
 	const [waiting, setWaiting] = useState(true);
 	const [error, setError] = useState(null);
 
+	const searchType = searchParams.get("s");
+
 	useEffect(() => {
 		AWS.config.update({
 			accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY,
@@ -20,12 +24,12 @@ export default function ResultsElement() {
 			region: process.env.REACT_APP_AWS_REGION,
 		});
 		
-		const searchType = searchParams.get("s");
 		if (searchType === "text") {
 			const searchPhrase = searchParams.get("phrase");
 			newURL = `${APIURL}?searchType=text&searchPhrase=${searchPhrase}`;
 		} else if (searchType === "image") {
 			const imgName = searchParams.get("imgName");
+			// image search handling here
 			newURL = `${APIURL}?searchType=image&imgName=${imgName}`
 		}
 
@@ -35,12 +39,17 @@ export default function ResultsElement() {
 			return response.json();
 		})
 		.then((jsonData) => {
+			// console.log("API DATA: ", jsonData);
 			const parsedResultsObject = JSON.parse(jsonData.results);
+			// console.log("PARSED API RESULTS: ", parsedResultsObject);
 	
 			const image_name = parsedResultsObject.map((entry: { image_url: any; }) => entry.image_url);
+			// console.log("IMAGE NAME RAW: ", image_name);
+			// console.log(imageName);
 		
 			const similarityNumbers = parsedResultsObject.map((entry: { cos_sim: any; }) => entry.cos_sim);
 			setSimilarity((similarityNumbers));
+			// console.log(similarity);
 
 			const s3 = new AWS.S3();
 
@@ -125,7 +134,7 @@ export default function ResultsElement() {
 					<div key={index}>
 						<div className="output-result">
 							{/* Image goes here */}
-							<h2 className="output-title">Property {index + 1} - {formatSimilarity(similarity[index])}% match to search</h2>
+							<h2 className="output-title">Property {index + 1} - {formatSimilarity(similarity[index], searchType)}</h2>
 							<img src={img} className="output-img" alt={`${index + 1}`} />
 							<div className="output-card">
 								<h5>{propertyData[index].address}</h5>
@@ -143,11 +152,18 @@ export default function ResultsElement() {
 	);
 }
 
-function formatSimilarity(similarity: number) {
-	// var word;
+function formatSimilarity(similarity: number, searchType: string | null) {
+	var word;
 	var formattedNumber = Math.round(similarity * 10000) /100; 
-	// if (formattedNumber > 90) word = `Very High Match to Search: ${formattedNumber.toFixed(4)}% match`;
-	// else if (formattedNumber > 70) word = `High Similarity Match: ${formattedNumber.toFixed(4)}% match`;
-	// else if (formattedNumber > 40) word = ``
-	return formattedNumber
+	if (searchType === "image") {
+		if (formattedNumber > 80) word = `High Similarity Detected: ${formattedNumber.toFixed(4)}% match`;
+		else if (formattedNumber >= 50) word = `Moderate Similarity Detected: ${formattedNumber.toFixed(4)}% match`;
+		else if (formattedNumber < 50) word = `Low Similarity Detected: ${formattedNumber.toFixed(4)}% match`;
+	}
+	else if (searchType = "text") {
+		if (formattedNumber > 35) word = `High Similarity Detected: ${formattedNumber.toFixed(4)}% match`;
+		else if (formattedNumber >= 25) word = `Moderate Similarity Detected: ${formattedNumber.toFixed(4)}% match`;
+		else if (formattedNumber < 25) word = `Low Similarity Detected: ${formattedNumber.toFixed(4)}% match`;
+	}
+	return word
 }
