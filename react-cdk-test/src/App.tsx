@@ -9,6 +9,10 @@ import Footer from "./components/Footer";
 import Results from "./pages/Results";
 import Landing from "./pages/Landing";
 
+/**
+ * Main application page for the program.
+ * @returns HTML elements to be displayed to the user
+ */
 function App() {
 	let items = ["Home", "CoreLogic", "Qut", "React", "AWS Lambda","AWS S3 Bucket", "AWS EC2"];
 	let litems = ["/", "https://www.corelogic.com.au/", "https://www.qut.edu.au/", "https://react.dev/", "https://docs.aws.amazon.com/lambda/", "https://aws.amazon.com/s3/", "https://aws.amazon.com/ec2/"]
@@ -17,7 +21,7 @@ function App() {
 	return (
 		<BrowserRouter>	
 			<div className="App">
-			<NavBar brandName="Ctl Alt Elite Artefact" imageSrcPathCAE={imagePathCAE} imageSrcPathGit={imagePathGit} navItems={items} linkItems={litems} />
+				<NavBar brandName="Ctl Alt Elite Artefact" imageSrcPathCAE={imagePathCAE} imageSrcPathGit={imagePathGit} navItems={items} linkItems={litems} />
 
 				<Routes>
 					<Route path="/" element={<Landing />}/> 

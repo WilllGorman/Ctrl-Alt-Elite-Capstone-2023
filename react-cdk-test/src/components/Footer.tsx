@@ -1,3 +1,7 @@
+/**
+ * Footer for the webpage.
+ * @returns HTML object for the footer of the application.
+ */
 export default function Footer() {
   return (
       <footer>
