@@ -43,7 +43,7 @@ interface NavBarProps {
                 </li>
               ))}
             </ul>
-            <Link to="https://github.com/WilllGorman/ctrl-alt-elite-react-gui">
+            <Link to="https://github.com/WilllGorman/Ctrl-Alt-Elite-Capstone-2023">
                 <img
                 src={imageSrcPathGit}
                 alt="GitLogo"
