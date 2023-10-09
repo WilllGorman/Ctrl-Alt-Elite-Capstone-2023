@@ -4,7 +4,7 @@
 
 This app by Ctrl Alt Elite is aimed to make searching for houses much easier. Users are able to search for properties based on images or features of other properties. The app features two search functionalities - a text based search, where the user can provide a brief description of the type of room they are looking for. The system will interpret this short description, and return the houses which best match the user's description. The user is also able to search for a property via an image of a room they like. The system will analyse the image and return the results sharing the most similar properties to the user's input image. For both search options, the top 4 results will be displayed, showing an image of the room in the matching property which best matches the user's search, along with the property details on the side. 
 
-<hr>
+
 
 ## To use this app
 ### Disable Protection
@@ -27,7 +27,6 @@ To use the text search, enter a brief descriptor of the room you are trying to f
 ### Image Search
 To use the image search feature, first make sure you have access to your search image on your device. Using the image upload bar on the right, select the image you want to search for. Confirm it is the correct image by viewing the name in the input bar, or by viewing your image underneath the bar. To search, press the search button to the right of this input box. It may take a few seconds to load once the button is pressed, so no need to click the button multiple times. You will be redirected once your photo's processing is completed, and the results will be displayed on the page.
 
-<hr>
 
 ## Running The App
 ### Prerequisites
@@ -45,26 +44,25 @@ To use the image search feature, first make sure you have access to your search 
 	- One to store the user's uploaded images
 	- One to store the dataset images
 3. In each bucket, under "Properties", add the following code to the "Cross Origin Resource Sharing"
-
-```json
-[
-    {
-        "AllowedHeaders": [
-            "*"
-        ],
-        "AllowedMethods": [
-            "PUT",
-            "POST",
-            "DELETE",
-            "GET"
-        ],
-        "AllowedOrigins": [
-            "*"
-        ],
-        "ExposeHeaders": []
-    }
-]
-```
+    ```json
+    [
+        {
+            "AllowedHeaders": [
+                "*"
+            ],
+            "AllowedMethods": [
+                "PUT",
+                "POST",
+                "DELETE",
+                "GET"
+            ],
+            "AllowedOrigins": [
+                "*"
+            ],
+            "ExposeHeaders": []
+        }
+    ]
+    ```
 4. Upload the images to the bucket dedicated for the dataset, under 'master/'.
 
 #### Setting Up AWS EC2 Instance
@@ -91,22 +89,22 @@ To use the image search feature, first make sure you have access to your search 
    AWS_SECRET_KEY=your-secret-key 
    AWS_REGION=your-region
    ```
-   7. Create a new security group for the instance. Allow all incoming TCP traffic on port 8000, save and assign to the instance.
+7. Create a new security group for the instance. Allow all incoming TCP traffic on port 8000, save and assign to the instance.
 
 ### Setting Up The Code
 1. To get started, if not already, clone this repo to your computer.
 2. Navigate to the `react-cdk-test` folder, and open a terminal session.
 3. Install the dependencies using:
-``` bash
-npm install
-```
+    ``` bash
+    npm install
+    ```
 4. Inside the `react-cdk-test` folder, create a new environment file `.env`. Inside this, add the following code, replacing the variables with your access key, secret key and region respectively:
-``` .env
-BUILD_PATH=infra/resources/build
-REACT_APP_AWS_ACCESS_KEY=your-access-key
-REACT_APP_AWS_SECRET_KEY=your-secret-key
-REACT_APP_AWS_REGION=your-region
-```
+    ``` .env
+    BUILD_PATH=infra/resources/build
+    REACT_APP_AWS_ACCESS_KEY=your-access-key
+    REACT_APP_AWS_SECRET_KEY=your-secret-key
+    REACT_APP_AWS_REGION=your-region
+    ```
 5. In `src/components/BodyElement.tsx`, replace the text in `const bucketName = "your-bucket-name-here"` with the name of your empty S3 bucket
 6. In `src/components/BodyElement.tsx`, replace the text in the line `const bucketName = "your-bucket-name-here"` with the name of your S3 bucket containing the image dataset.
 
