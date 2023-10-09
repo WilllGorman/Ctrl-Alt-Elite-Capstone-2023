@@ -79,8 +79,7 @@ To use the image search feature, first make sure you have access to your search 
    ```
 4. Install Python packages required for the script:
    ``` bash
-   pip install numpy pandas matplotlib flask flask-cors pillow datasets 
-   transformers pathlib scikit-learn boto3 dotenv
+   pip install numpy pandas matplotlib flask flask-cors pillow datasets transformers pathlib scikit-learn boto3 dotenv
    ```
 5. Create a subfolder in the home directory named "Capstone" or whatever (Note: Changing the folder from "Capstone" will require the path to be changed in the Python script).
 6. In this folder, transfer the `aws-clip-script.py` file using SCP, SFTP or any other method. Create a new environment file `.env` and add the following lines, replacing the values with your AWS access key, secret key and region respectively.
