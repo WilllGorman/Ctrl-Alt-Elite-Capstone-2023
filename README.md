@@ -10,18 +10,20 @@ This app by Ctrl Alt Elite is aimed to make searching for houses much easier. Us
 ### Disable Protection
 This project runs the API backend using HTTP protocol, while the front end uses HTTPS. Because of this, most modern web browsers will block resources from HTTP sources for safety reasons. This means that the application will be unable to communicate with the back end. To counter this, the user must disable protection on the browser. 
 #### In Firefox:
-1. Click the padlock icon in the address bar
-2. Click 'Connection Secure'
-3. Click 'Disable Protection'
-4. Re-enter the URL for the website and press enter
-5. You are now able to use the app with all its' features.
-#### In Chrome:
-1. Click the padlock icon in
-2. Click 'Site Settings'
-3. Scroll down to 'Allow Blocked Content' and change to 'Allow'
-4. Go back to the window and select the 'Reload' button
+1. Press the text search button. You will be taken to a screen that says 'Loading...'.
+2. Click the padlock icon in the address bar
+3. Click 'Connection Secure'
+4. Click 'Disable Protection'
 5. Re-enter the URL for the website and press enter
-6. You are now able to use the app with all its features.
+6. You are now able to use the app with all its' features.
+#### In Chrome:
+1. Press the text search button. You will be taken to a screen that says 'Loading...'.
+2. Click the padlock icon in
+3. Click 'Site Settings'
+4. Scroll down to 'Allow Blocked Content' and change to 'Allow'
+5. Go back to the window and select the 'Reload' button
+6. Re-enter the URL for the website and press enter
+7. You are now able to use the app with all its features.
 ### Text Search
 To use the text search, enter a brief descriptor of the room you are trying to find. For example, brief descriptions such as "bright kids bedroom" or "modern wooden kitchen" will return highly accurate results, whereas specific searches are less likely to return confident matches. To search, press the search button located next to the search bar, and your results will be displayed on the page you are redirected to.
 ### Image Search
