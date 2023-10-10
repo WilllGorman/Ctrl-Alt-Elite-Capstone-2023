@@ -8,7 +8,7 @@ This app by Ctrl Alt Elite is aimed to make searching for houses much easier. Us
 
 ## To use this app
 ### Disable Protection
-Due to time constraints, this project runs the API backend using HTTP protocol, while the front end uses HTTPS. Because of this, most modern web browsers will block resources from HTTP sources for safety reasons. This means that the application will be unable to communicate with the back end. To counter this, the user must disable protection on the browser. 
+This project runs the API backend using HTTP protocol, while the front end uses HTTPS. Because of this, most modern web browsers will block resources from HTTP sources for safety reasons. This means that the application will be unable to communicate with the back end. To counter this, the user must disable protection on the browser. 
 #### In Firefox:
 1. Click the padlock icon in the address bar
 2. Click 'Connection Secure'
@@ -109,7 +109,7 @@ To use the image search feature, first make sure you have access to your search 
 
 ### Running The Application
 1. Launch your EC2 instance. Note the Public IP Address if an Elastic IP has not been assigned. 
-2. Navigate to `src/components/ResultsElement.tsx` and replace the URL in the `var APIURL = "http://127.0.0.1:8000/api/results"` with the URL to your EC2 instance. An IP address `123.45.67.89` should look like `http://ec2-123-45-67-89.ap-southeast-2.compute.amazonaws.com:8000/api/results` for example.
+2. Navigate to `src/components/ResultsElement.tsx` and replace the URL in the `var APIURL = "http://ec2-13-55-201-167.ap-southeast-2.compute.amazonaws.com:8000/api/results"` with the URL to your EC2 instance. An IP address `123.45.67.89` should look like `http://ec2-123-45-67-89.ap-southeast-2.compute.amazonaws.com:8000/api/results` for example.
 3. In the EC2 Instance, navigate to the directory containing the Python script. Run the following command to run the script in the background of the instance:
    ``` bash
    nohup python3 aws-clip-script.py > log.txt 2>&1 &
