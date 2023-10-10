@@ -35,7 +35,7 @@ To use the image search feature, first make sure you have access to your search 
 - Two S3 buckets
 	- One for uploading images
 	- One for holding the image dataset
-- Access to AWS CDK to deploy the app \*FIND INSTRUCTIONS \*
+- Configure your AWS account to access AWS CDK
 - Access to this Github repo.
 ### Setting AWS Account Up
 #### Setting Up AWS S3 Buckets
@@ -116,14 +116,18 @@ To use the image search feature, first make sure you have access to your search 
    ```
     Note: This step will take 15-20 minutes on a t3.large instance. This process will not  provide an indication of completion. 
 4. On your computer, navigate to the `react-cdk-test` folder and open a new console.
-5. Bootstrap your working environment using the following:
-   ``` bash
-   cdk bootstrap aws://AWS-ACCOUNT-NUMBER/AWS-REGION
-   ```
-6. Once completed, run the following command to launch your instance. This will start to deploy your instance on AWS.
+5. Once completed, run the following command to launch your instance. This will start to deploy your instance on AWS.
    ``` bash
    npm run deploy
    ```
-	After some time, you will be presented with a screen confirming you wish to deploy the app. Type `y` and press enter and the app will begin deploying.
-7. After completion, the console will produce a Cloudfront link, which will look like `d123456789abcd.cloudfront.net`, this is the link to your web app. Copy this link and paste it in your browser.
-8. Your app is now working! Follow the instructions for disabling protection and your app will work perfectly.
+	After some time, the console will prompt you to confirm you wish to deploy the app. Type `y` and press enter and the app will begin deploying.
+6. After completion, the console will produce a Cloudfront link, which will look like `d123456789abcd.cloudfront.net`, this is the link to your web app. Copy this link and paste it in your browser.
+7. Your app is now working! Follow the instructions for disabling protection and your app will work perfectly.
+### Closing The Application
+1. Navigate to `react-cdk-test/infra` and open a terminal session.
+2. Enter the following command:
+    ``` bash
+    cdk destroy
+    ```
+    After some time, you will be prompted confirming you wish to delete the app. Type `y` and press enter. This will delete the application from the S3 bucket.
+3. In your browser, navigate to your AWS console and go to the EC2 control panel. Select 'Stop' on the running EC2 instance. This will safely close the running EC2 instance. 
